@@ -40,8 +40,7 @@ public class Bank {
 
 
     /**
-     * Конструктор для создания нового банка.
-     * При создании банка генерируются его рейтинг, количество денег и процентная ставка.
+     * Конструктор  банка. Генерируются его рейтинг, количество денег и процентная ставка.
      */
     public Bank(int id_bank, String name_bank) {
         this.id_bank = id_bank;
@@ -54,12 +53,12 @@ public class Bank {
     /**
      * Метод для вычисления процентной ставки на основе рейтинга банка.
      * Чем выше рейтинг, тем ниже процентная ставка.
-     *
-     * @param rating Рейтинг банка
-     * @return Процентная ставка
      */
     private double calculateInterestRate(int rating) {
-        return 20 - (rating / 5.0); // Чем выше рейтинг, тем ниже ставка
+        double maxRate = 20.0; // Максимальная ставка 20%
+        double minRate = 2.0;  // Минимальная ставка пусть 2%
+
+        return maxRate - ((rating / 100.0) * (maxRate - minRate));
     }
 
     // Геттеры и сеттеры
@@ -110,6 +109,14 @@ public class Bank {
 
     public double getTotal_money() {
         return total_money;
+    }
+
+    public void setTotalMoney(double total_money) {
+        if (total_money >= 0 && total_money <= 1000000) {
+            this.total_money = total_money;
+        } else {
+            System.out.println("Ошибка: Недопустимая сумма денег.");
+        }
     }
 
     public double getInterest_rate() {
