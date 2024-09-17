@@ -1,18 +1,24 @@
 package main.java.tech.reliab.course.toropchinda.bank;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import main.java.tech.reliab.course.toropchinda.bank.entity.Bank;
+import main.java.tech.reliab.course.toropchinda.bank.service.impl.BankService;
+
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.println("Hello and welcome!");
 
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        BankService bankService = new BankService() {};
+        Bank bank = new Bank(1, "MyBank");
+
+//сотрудник
+        bankService.increaseEmployeeCount(bank);
+
+// клиент
+        bankService.increaseClientCount(bank);
+        bankService.increaseClientCount(bank);
+
+        System.out.println("Количество сотрудников: " + bank.getCount_employee());
+        System.out.println("Количество клиентов: " + bank.getCount_client());
     }
 }
