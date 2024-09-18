@@ -39,24 +39,6 @@ public class BankOffice {
     // Стоимость аренды офиса
     private double rentalCost;
 
-    // Конструктор
-    public BankOffice(int id_office, String name_office, String address_office, String status, boolean canPlaceAtm,
-                      int atm_count, boolean canIssueLoans, boolean isCashWithdrawalAvailable, boolean isDepositAvailable,
-                      double moneyAvailable, double rentalCost) {
-        this.id_office = id_office;
-        this.name_office = name_office;
-        this.address_office = address_office;
-        this.status = status;
-        this.canPlaceAtm = canPlaceAtm;
-        this.atm_count = atm_count;
-        this.canIssueLoans = canIssueLoans;
-        this.isCashWithdrawalAvailable = isCashWithdrawalAvailable;
-        this.isDepositAvailable = isDepositAvailable;
-        this.moneyAvailable = moneyAvailable;
-        this.rentalCost = rentalCost;
-    }
-
-    // Геттеры и сеттеры
 
     public int getId_office() {
         return id_office;

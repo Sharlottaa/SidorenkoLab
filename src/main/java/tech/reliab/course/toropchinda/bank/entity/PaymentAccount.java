@@ -16,16 +16,6 @@ public class PaymentAccount {
     // Сумма денег на счете (по умолчанию 0)
     private double balance;
 
-    // Конструктор
-    public PaymentAccount(int id_paymentAccount, User user, String bankName, double balance) {
-        this.id_paymentAccount = id_paymentAccount;
-        this.user = user;
-        this.bankName = bankName;
-        this.balance = balance;
-    }
-
-    // Геттеры и сеттеры
-
     public int getId_paymentAccount() {
         return id_paymentAccount;
     }

@@ -40,24 +40,6 @@ public class CreditAccount {
     // Платежный счет, с которого будут погашаться платежи по кредиту
     private PaymentAccount paymentAccount;
 
-    // Конструктор
-    public CreditAccount(int id_creditAccount, User user, String bankName, Date startDate, Date endDate, int months,
-                         double creditAmount, double monthlyPayment, double interestRate, Employee employee,
-                         PaymentAccount paymentAccount) {
-        this.id_creditAccount = id_creditAccount;
-        this.user = user;
-        this.bankName = bankName;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.months = months;
-        this.creditAmount = creditAmount;
-        this.monthlyPayment = monthlyPayment;
-        this.interestRate = interestRate;
-        this.employee = employee;
-        this.paymentAccount = paymentAccount;
-    }
-
-    // Геттеры и сеттеры
 
     public int getId_creditAccount() {
         return id_creditAccount;

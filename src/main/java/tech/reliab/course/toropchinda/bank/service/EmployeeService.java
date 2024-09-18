@@ -9,54 +9,24 @@ import java.util.Date;
 public interface EmployeeService {
 
     // Создает нового сотрудника.
-    default Employee createEmployee(int id, String fullName, Date birthDate, String position, Bank bank, boolean isRemote,
-                                    BankOffice bankOffice, boolean canIssueLoans, double salary) {
-        return new Employee(id, fullName, birthDate, position, bank, isRemote, bankOffice, canIssueLoans, salary);
-    }
+    Employee createEmployee(int id, String fullName, Date birthDate, String position, Bank bank, boolean isRemote,
+                            BankOffice bankOffice, boolean canIssueLoans, double salary);
 
-    // Получает информацию о сотруднике
-    default String readEmployee(Employee employee) {
-        return "ID сотрудника: " + employee.getId_employee() + "\n" +
-                "ФИО: " + employee.getFullName() + "\n" +
-                "Дата рождения: " + employee.getBirthDate() + "\n" +
-                "Должность: " + employee.getPosition() + "\n" +
-                "Банк: " + employee.getBank().getName_bank() + "\n" +
-                "Работает ли удаленно: " + (employee.isRemote() ? "Да" : "Нет") + "\n" +
-                "Офис: " + employee.getBankOffice().getName_office() + "\n" +
-                "Может выдавать кредиты: " + (employee.isCanIssueLoans() ? "Да" : "Нет") + "\n" +
-                "Зарплата: " + employee.getSalary();
-    }
+    // Получает информацию о сотруднике.
+    String readEmployee(Employee employee);
 
-    // Обновляет информацию о сотруднике.
-    default void updateEmployee(Employee employee, String newPosition, double newSalary) {
-        employee.setPosition(newPosition);
-        employee.setSalary(newSalary);
-    }
+    //  Обновляет информацию о сотруднике.
+    void updateEmployee(Employee employee, String newPosition, double newSalary);
 
-    //Удаляет сотрудника.
-    default String deleteEmployee(Employee employee) {
-        return "Сотрудник с ID: " + employee.getId_employee() + " был успешно удален.";
-    }
+    // Удаляет сотрудника.
+    String deleteEmployee(Employee employee);
 
-    /**
-     * Повышает зарплату сотруднику.
-     * @param employee Объект сотрудника, которому нужно повысить зарплату
-     * @param amount Сумма повышения зарплаты
-     */
-    default void increaseSalary(Employee employee, double amount) {
-        employee.setSalary(employee.getSalary() + amount);
-    }
+    // Повышает зарплату сотруднику.
+    void increaseSalary(Employee employee, double amount);
 
     // Назначает сотрудника на удаленную работу.
-    default void setRemoteWork(Employee employee) {
-        employee.setRemote(true);
-    }
+    void setRemoteWork(Employee employee);
 
-    /**
-     * Проверяет, может ли сотрудник выдавать кредиты.
-     * @return Может ли сотрудник выдавать кредиты (true/false)
-     */
-    default boolean canIssueLoans(Employee employee) {
-        return employee.isCanIssueLoans();
-    }
+    // Проверяет, может ли сотрудник выдавать кредиты.
+    boolean canIssueLoans(Employee employee);
 }

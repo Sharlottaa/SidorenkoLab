@@ -1,6 +1,7 @@
 package main.java.tech.reliab.course.toropchinda.bank.entity;
+
 public class BankAtm {
-    //  Id банкомата
+    // Id банкомата
     private int id_atm;
 
     // Имя банкомата
@@ -33,24 +34,7 @@ public class BankAtm {
     // Стоимость обслуживания банкомата
     private double maintenanceCost;
 
-    // Конструктор банкомата
-    public BankAtm(int id_atm, String name_atm, String address_atm, String status, Bank bank, BankOffice bankOffice,
-                   Employee employee, boolean isCashWithdrawalAvailable, boolean isDepositAvailable, double moneyAvailable,
-                   double maintenanceCost) {
-        this.id_atm = id_atm;
-        this.name_atm = name_atm;
-        this.address_atm = address_atm;
-        this.status = status;
-        this.bank = bank;
-        this.bankOffice = bankOffice;
-        this.employee = employee;
-        this.isCashWithdrawalAvailable = isCashWithdrawalAvailable;
-        this.isDepositAvailable = isDepositAvailable;
-        this.moneyAvailable = moneyAvailable;
-        this.maintenanceCost = maintenanceCost;
-    }
-
-
+    // Геттеры и сеттеры
     public int getId_atm() {
         return id_atm;
     }

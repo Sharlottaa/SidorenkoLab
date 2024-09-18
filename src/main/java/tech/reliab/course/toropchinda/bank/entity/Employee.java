@@ -35,22 +35,6 @@ public class Employee {
     // Размер зарплаты сотрудника
     private double salary;
 
-    // Конструктор
-    public Employee(int id_employee, String fullName, Date birthDate, String position, Bank bank, boolean isRemote,
-                    BankOffice bankOffice, boolean canIssueLoans, double salary) {
-        this.id_employee = id_employee;
-        this.fullName = fullName;
-        this.birthDate = birthDate;
-        this.position = position;
-        this.bank = bank;
-        this.isRemote = isRemote;
-        this.bankOffice = bankOffice;
-        this.canIssueLoans = canIssueLoans;
-        this.salary = salary;
-    }
-
-    // Геттеры и сеттеры
-
     public int getId_employee() {
         return id_employee;
     }

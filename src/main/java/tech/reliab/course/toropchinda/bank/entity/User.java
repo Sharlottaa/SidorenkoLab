@@ -35,20 +35,6 @@ public class User {
     // Кредитный рейтинг для банка (генерируется рандомно)
     private int creditRating;
 
-    // Конструктор
-    public User(int id_user, String fullName, String birthDate, String placeOfWork, double monthlyIncome, int creditRating) {
-        this.id_user = id_user;
-        this.fullName = fullName;
-        this.birthDate = birthDate;
-        this.placeOfWork = placeOfWork;
-        this.monthlyIncome = monthlyIncome;
-        this.banks = new ArrayList<>();
-        this.creditAccounts = new ArrayList<>();
-        this.paymentAccounts = new ArrayList<>();
-        this.creditRating = creditRating;
-    }
-
-    // Геттеры и сеттеры
 
     public int getId_user() {
         return id_user;
