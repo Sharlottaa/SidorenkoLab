@@ -3,31 +3,24 @@ package main.java.tech.reliab.course.toropchinda.bank.entity;
 import java.util.Random;
 
 public class Bank {
-    /*
-             • Рейтинг банка (генерируется рандомно, от 0 до 100, где 100 наивысший
-             балл, чем выше рейтинг банка, тем меньше должна быть процентная ставка)
- • Всего денег в банке (генерируется рандомно, но не более 1 000 000)
- • Процентная ставка (генерируется рандомно, но не более 20%, однако
-             нужно учитывать рейтинг банка, чем он выше, тем ставка должна
-                              сгенерироваться меньше)
-         */
+
     // Id банка
     private int id_bank;
+
     // Имя банка
     public String name_bank;
 
     // Кол-во офисов
-    public static int count_office = 0;
+    private int count_office = 0;
 
     // Кол-во банкоматов
-    public static int count_atm = 0;
+    private int count_atm = 0;
 
     // Кол-во сотрудников
-    public static int count_employee = 0;
+    private int count_employee = 0;
 
     // Количество клиентов
-    public static int count_client = 0;
-
+    private int count_client = 0;
 
     // Рейтинг банка (генерируется рандомно, от 0 до 100)
     private int rating_bank;
@@ -35,12 +28,11 @@ public class Bank {
     // Всего денег в банке (генерируется рандомно, но не более 1 000 000)
     private double total_money;
 
-    // Процентная ставка (генерируется рандомно, но не более 20, но и зависит от рейтинга банка)
+    // Процентная ставка (генерируется рандомно, но не более 20%, зависит от рейтинга банка)
     private double interest_rate;
 
-
     /**
-     * Конструктор  банка. Генерируются его рейтинг, количество денег и процентная ставка.
+     * Конструктор банка. Генерируются его рейтинг, количество денег и процентная ставка.
      */
     public Bank(int id_bank, String name_bank) {
         this.id_bank = id_bank;
@@ -56,7 +48,7 @@ public class Bank {
      */
     private double calculateInterestRate(int rating) {
         double maxRate = 20.0; // Максимальная ставка 20%
-        double minRate = 2.0;  // Минимальная ставка пусть 2%
+        double minRate = 2.0;  // Минимальная ставка 2%
 
         return maxRate - ((rating / 100.0) * (maxRate - minRate));
     }
@@ -123,5 +115,3 @@ public class Bank {
         return interest_rate;
     }
 }
-
-
