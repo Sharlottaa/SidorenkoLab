@@ -60,4 +60,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     public String deleteEmployee(Employee employee) {
         return "Сотрудник с ID: " + employee.getId_employee() + " был успешно удален.";
     }
+
+    @Override
+    public void increaseSalary(Employee employee, double amount) {
+        employee.setSalary(employee.getSalary() + amount);
+    }
+
+    @Override
+    public void setRemoteWork(Employee employee) {
+        employee.setRemote(true);
+    }
+
+    @Override
+    public boolean canIssueLoans(Employee employee) {
+        return employee.isCanIssueLoans();
+    }
 }

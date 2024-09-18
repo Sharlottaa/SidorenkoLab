@@ -27,4 +27,4 @@ public interface BankOfficeService {
     boolean canPlaceAtm(BankOffice office);
 }
 
-}
+
