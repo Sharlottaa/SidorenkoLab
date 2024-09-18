@@ -1,6 +1,5 @@
 package main.java.tech.reliab.course.toropchinda.bank.entity;
 
-import java.util.Random;
 
 public class Bank {
 
@@ -31,36 +30,20 @@ public class Bank {
     // Процентная ставка (генерируется рандомно, но не более 20%, зависит от рейтинга банка)
     private double interest_rate;
 
-    /**
-     * Конструктор банка. Генерируются его рейтинг, количество денег и процентная ставка.
-     */
-    public Bank(int id_bank, String name_bank) {
-        this.id_bank = id_bank;
-        this.name_bank = name_bank;
-        this.rating_bank = new Random().nextInt(101); // Генерация рейтинга от 0 до 100
-        this.total_money = new Random().nextDouble() * 1000000; // Генерация суммы денег до 1 000 000
-        this.interest_rate = calculateInterestRate(this.rating_bank); // Расчет процентной ставки
-    }
-
-    /**
-     * Метод для вычисления процентной ставки на основе рейтинга банка.
-     * Чем выше рейтинг, тем ниже процентная ставка.
-     */
-    private double calculateInterestRate(int rating) {
-        double maxRate = 20.0; // Максимальная ставка 20%
-        double minRate = 2.0;  // Минимальная ставка 2%
-
-        return maxRate - ((rating / 100.0) * (maxRate - minRate));
-    }
-
-    // Геттеры и сеттеры
-
     public int getId_bank() {
         return id_bank;
     }
 
+    public void setId_bank(int id_bank) {
+        this.id_bank = id_bank;
+    }
+
     public String getName_bank() {
         return name_bank;
+    }
+
+    public void setName_bank(String name_bank) {
+        this.name_bank = name_bank;
     }
 
     public int getCount_office() {
@@ -99,19 +82,23 @@ public class Bank {
         return rating_bank;
     }
 
+    public void setRating_bank(int rating_bank) {
+        this.rating_bank = rating_bank;
+    }
+
     public double getTotal_money() {
         return total_money;
     }
 
-    public void setTotalMoney(double total_money) {
-        if (total_money >= 0 && total_money <= 1000000) {
-            this.total_money = total_money;
-        } else {
-            System.out.println("Ошибка: Недопустимая сумма денег.");
-        }
+    public void setTotal_money(double total_money) {
+        this.total_money = total_money;
     }
 
     public double getInterest_rate() {
         return interest_rate;
+    }
+
+    public void setInterest_rate(double interest_rate) {
+        this.interest_rate = interest_rate;
     }
 }

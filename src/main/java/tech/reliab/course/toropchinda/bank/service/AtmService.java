@@ -1,4 +1,4 @@
-package main.java.tech.reliab.course.toropchinda.bank.service.impl;
+package main.java.tech.reliab.course.toropchinda.bank.service;
 
 
 import main.java.tech.reliab.course.toropchinda.bank.entity.*;
@@ -65,11 +65,4 @@ public interface AtmService {
         }
     }
 
-    /**
-     * Проверяет статус банкомата.
-     * @return Статус банкомата (работает/не работает/нет денег)
-     */
-    default String checkStatus(BankAtm atm) {
-        return atm.getStatus();
-    }
 }

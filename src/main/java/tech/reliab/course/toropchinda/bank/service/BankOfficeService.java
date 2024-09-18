@@ -1,4 +1,4 @@
-package main.java.tech.reliab.course.toropchinda.bank.service.impl;
+package main.java.tech.reliab.course.toropchinda.bank.service;
 import main.java.tech.reliab.course.toropchinda.bank.entity.BankOffice;
 
 public interface BankOfficeService {

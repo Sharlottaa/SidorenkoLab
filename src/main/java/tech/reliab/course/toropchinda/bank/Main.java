@@ -1,6 +1,7 @@
 package main.java.tech.reliab.course.toropchinda.bank;
 
 import main.java.tech.reliab.course.toropchinda.bank.entity.*;
+import main.java.tech.reliab.course.toropchinda.bank.service.*;
 import main.java.tech.reliab.course.toropchinda.bank.service.impl.*;
 
 import java.util.Date;
@@ -9,7 +10,7 @@ import java.util.Date;
 public class Main {
     public static void main(String[] args) {
 // Инициализация банка
-        BankService bankService = new BankService() {};
+        BankService bankService = new BankServiceImpl();
         Bank bank = bankService.createBank(1, "Bank of Future");
 
         // Инициализация офиса банка
