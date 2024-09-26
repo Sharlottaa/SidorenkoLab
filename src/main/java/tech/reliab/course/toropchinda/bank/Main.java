@@ -1,57 +1,90 @@
 package main.java.tech.reliab.course.toropchinda.bank;
 
 import main.java.tech.reliab.course.toropchinda.bank.entity.*;
+import main.java.tech.reliab.course.toropchinda.bank.service.*;
 import main.java.tech.reliab.course.toropchinda.bank.service.impl.*;
 
-import java.util.Date;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 public class Main {
 
     public static void main(String[] args) {
+        // Создание сервисов
+        BankService bankService = new BankServiceImpl();
+        BankOfficeService bankOfficeService = new BankOfficeServiceImpl();
+        EmployeeService employeeService = new EmployeeServiceImpl();
+        AtmService atmService = new BankAtmServiceImpl();
+        UserService userService = new UserServiceImpl();
+        PaymentAccountService paymentAccountService = new PaymentAccountServiceImpl();
+        CreditAccountService creditAccountService = new CreditAccountServiceImpl();
 
-        // Создаем объекты сервисов
-        BankServiceImpl bankService = new BankServiceImpl();
-        BankOfficeServiceImpl bankOfficeService = new BankOfficeServiceImpl();
-        BankAtmServiceImpl bankAtmService = new BankAtmServiceImpl();
-        EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
-        UserServiceImpl userService = new UserServiceImpl();
-        PaymentAccountServiceImpl paymentAccountService = new PaymentAccountServiceImpl();
-        CreditAccountServiceImpl creditAccountService = new CreditAccountServiceImpl();
+        // Создание 5 банков
+        for (int i = 1; i <= 5; i++) {
+            Bank bank = bankService.createBank(i, "Bank " + i);
 
-        // Создаем новый банк
-        Bank bank = bankService.createBank(1, "Tech Bank");
-        System.out.println("Создан банк:");
-        System.out.println(bankService.readBank(bank));
+            List<Employee> employees = new ArrayList<>();  // Список для хранения сотрудников каждого банка
 
-        // Создаем офис банка
-        BankOffice bankOffice = bankOfficeService.createOffice(1, "Main Office", "123 Main St", "Работает", true, 5, true, true, true, 50000, 20000);
-        System.out.println("\nСоздан банковский офис:");
-        System.out.println(bankOfficeService.readOffice(bankOffice));
+            // Создание 3 офисов для каждого банка
+            for (int j = 1; j <= 3; j++) {
+                BankOffice office = bankOfficeService.createOffice(j, "Office " + j, "Address " + j, "Работает", true, 0, true, true, true, 50000, 2000);
+                bankService.increaseOfficeCount(bank);
 
-        // Создаем банкомат
-        BankAtm bankAtm = bankAtmService.createAtm(1, "ATM 001", "123 Main St", "Работает", bank, bankOffice, null, true, true, 20000, 1000);
-        System.out.println("\nСоздан банкомат:");
-        System.out.println(bankAtmService.readAtm(bankAtm));
+                // Создание 5 сотрудников в каждом офисе
+                for (int k = 1; k <= 5; k++) {
+                    Employee employee = employeeService.createEmployee(k, "Employee " + k, new Date(), "Manager", bank, false, office, true, 50000);
+                    employees.add(employee);  // Добавляем сотрудников в список
+                    bankService.increaseEmployeeCount(bank);
+                }
 
-        // Создаем сотрудника
-        Employee employee = employeeService.createEmployee(1, "Alice Smith", new Date(), "Менеджер", bank, false, bankOffice, true, 50000);
-        System.out.println("\nСоздан сотрудник:");
-        System.out.println(employeeService.readEmployee(employee));
+                // Создание 3 банкоматов для каждого банка
+                for (int m = 1; m <= 3; m++) {
+                    BankAtm atm = atmService.createAtm(m, "ATM " + m, office.getAddress_office(), "Работает", bank, office, null, true, true, 10000, 500);
+                    bankService.increaseAtmCount(bank);
+                }
+            }
 
-        // Создаем пользователя
-        User user = userService.createUser(1, "John Doe", "1990-01-01", "Software Engineer");
-        System.out.println("\nСоздан пользователь:");
-        System.out.println(userService.readUser(user));
+            // Создание 5 клиентов для каждого банка
+            for (int c = 1; c <= 5; c++) {
+                User user = userService.createUser(c, "User " + c, "01.01.1980", "Company " + c);
+                bankService.increaseClientCount(bank);
 
-        // Создаем платежный счет
-        PaymentAccount paymentAccount = paymentAccountService.createPaymentAccount(1, user, "Tech Bank", 10000);
-        System.out.println("\nСоздан платежный счет:");
-        System.out.println(paymentAccountService.readPaymentAccount(paymentAccount));
+                // Создание 2 платежных счетов для каждого клиента
+                List<PaymentAccount> paymentAccounts = new ArrayList<>();
+                for (int p = 1; p <= 2; p++) {
+                    PaymentAccount paymentAccount = paymentAccountService.createPaymentAccount(p, user, bank.getName_bank(), 1000 * p);
+                    paymentAccounts.add(paymentAccount);  // Добавляем платежные счета в список
+                    userService.addPaymentAccountToUser(user, paymentAccount);
+                }
 
-        // Создаем кредитный счет
-        CreditAccount creditAccount = creditAccountService.createCreditAccount(1, user, "Tech Bank", new Date(), new Date(), 12, 50000, 5000, 5.5, employee, paymentAccount);
-        System.out.println("\nСоздан кредитный счет:");
-        System.out.println(creditAccountService.readCreditAccount(creditAccount));
+                // Создание 2 кредитных счетов для каждого клиента
+                for (int cr = 1; cr <= 2; cr++) {
+                    // Назначаем случайного сотрудника и платежный счет
+                    Employee creditEmployee = employees.get(new Random().nextInt(employees.size()));
+                    PaymentAccount creditPaymentAccount = paymentAccounts.get(new Random().nextInt(paymentAccounts.size()));
+
+                    CreditAccount creditAccount = creditAccountService.createCreditAccount(cr, user, bank.getName_bank(), new Date(), new Date(), 12, 10000 * cr, 1000, 5, creditEmployee, creditPaymentAccount);
+                    userService.addCreditAccountToUser(user, creditAccount);
+                }
+
+                // Вывод информации по всем счетам клиента
+                System.out.println("Клиент: " + user.getFullName());
+                System.out.println("Платежные счета: ");
+                for (PaymentAccount pa : user.getPaymentAccounts()) {
+                    System.out.println(paymentAccountService.readPaymentAccount(pa));
+                }
+
+                System.out.println("Кредитные счета: ");
+                for (CreditAccount ca : user.getCreditAccounts()) {
+                    System.out.println(creditAccountService.readCreditAccount(ca));
+                }
+            }
+
+            // Вывод информации по банку
+            System.out.println(bankService.readBank(bank));
+        }
     }
 }

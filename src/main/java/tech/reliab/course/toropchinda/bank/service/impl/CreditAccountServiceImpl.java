@@ -38,6 +38,9 @@ public class CreditAccountServiceImpl implements CreditAccountService {
 
     @Override
     public String readCreditAccount(CreditAccount creditAccount) {
+        String employeeInfo = (creditAccount.getEmployee() != null) ? creditAccount.getEmployee().getFullName() : "Нет данных";
+        String paymentAccountInfo = (creditAccount.getPaymentAccount() != null) ? String.valueOf(creditAccount.getPaymentAccount().getId_paymentAccount()) : "Нет данных";
+
         return "ID кредитного счета: " + creditAccount.getId_creditAccount() + "\n" +
                 "Пользователь: " + creditAccount.getUser().getFullName() + "\n" +
                 "Название банка: " + creditAccount.getBankName() + "\n" +
@@ -47,9 +50,13 @@ public class CreditAccountServiceImpl implements CreditAccountService {
                 "Сумма кредита: " + creditAccount.getCreditAmount() + "\n" +
                 "Ежемесячный платеж: " + creditAccount.getMonthlyPayment() + "\n" +
                 "Процентная ставка: " + creditAccount.getInterestRate() + "\n" +
-                "Сотрудник, выдавший кредит: " + creditAccount.getEmployee().getFullName() + "\n" +
-                "Платежный счет: " + creditAccount.getPaymentAccount().getId_paymentAccount();
+                "Сотрудник, выдавший кредит: " + employeeInfo + "\n" +
+                "Платежный счет: " + paymentAccountInfo;
     }
+
+
+
+
 
     @Override
     public void updateCreditAccount(CreditAccount creditAccount, double newCreditAmount, double newMonthlyPayment,

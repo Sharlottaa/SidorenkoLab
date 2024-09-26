@@ -3,9 +3,6 @@ package main.java.tech.reliab.course.toropchinda.bank.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Класс, представляющий клиента банка.
- */
 public class User {
 
     // Уникальный идентификатор клиента
@@ -35,6 +32,14 @@ public class User {
     // Кредитный рейтинг для банка (генерируется рандомно)
     private int creditRating;
 
+    // Конструктор без аргументов, который инициализирует списки
+    public User() {
+        this.banks = new ArrayList<>();
+        this.creditAccounts = new ArrayList<>();
+        this.paymentAccounts = new ArrayList<>();
+    }
+
+    // Геттеры и сеттеры
 
     public int getId_user() {
         return id_user;
@@ -80,24 +85,24 @@ public class User {
         return banks;
     }
 
-    public void addBank(Bank bank) {
-        this.banks.add(bank);
+    public void setBanks(List<Bank> banks) {
+        this.banks = banks;
     }
 
     public List<CreditAccount> getCreditAccounts() {
         return creditAccounts;
     }
 
-    public void addCreditAccount(CreditAccount creditAccount) {
-        this.creditAccounts.add(creditAccount);
+    public void setCreditAccounts(List<CreditAccount> creditAccounts) {
+        this.creditAccounts = creditAccounts;
     }
 
     public List<PaymentAccount> getPaymentAccounts() {
         return paymentAccounts;
     }
 
-    public void addPaymentAccount(PaymentAccount paymentAccount) {
-        this.paymentAccounts.add(paymentAccount);
+    public void setPaymentAccounts(List<PaymentAccount> paymentAccounts) {
+        this.paymentAccounts = paymentAccounts;
     }
 
     public int getCreditRating() {
@@ -106,6 +111,20 @@ public class User {
 
     public void setCreditRating(int creditRating) {
         this.creditRating = creditRating;
+    }
+
+    // Методы для добавления объектов в списки
+
+    public void addBank(Bank bank) {
+        this.banks.add(bank);
+    }
+
+    public void addCreditAccount(CreditAccount creditAccount) {
+        this.creditAccounts.add(creditAccount);
+    }
+
+    public void addPaymentAccount(PaymentAccount paymentAccount) {
+        this.paymentAccounts.add(paymentAccount);
     }
 }
 

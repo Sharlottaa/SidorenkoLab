@@ -1,10 +1,9 @@
 package main.java.tech.reliab.course.toropchinda.bank.service.impl;
-import main.java.tech.reliab.course.toropchinda.bank.entity.Bank;
-import main.java.tech.reliab.course.toropchinda.bank.entity.CreditAccount;
-import main.java.tech.reliab.course.toropchinda.bank.entity.PaymentAccount;
-import main.java.tech.reliab.course.toropchinda.bank.entity.User;
-import main.java.tech.reliab.course.toropchinda.bank.service.UserService;
+import main.java.tech.reliab.course.toropchinda.bank.entity.*;
+import main.java.tech.reliab.course.toropchinda.bank.service.*;
 
+
+import java.util.ArrayList;
 import java.util.Random;
 
 public class UserServiceImpl implements UserService {
@@ -26,8 +25,14 @@ public class UserServiceImpl implements UserService {
         user.setMonthlyIncome(monthlyIncome);
         user.setCreditRating(creditRating);
 
+        // Инициализация списков
+        user.setBanks(new ArrayList<>());
+        user.setCreditAccounts(new ArrayList<>());
+        user.setPaymentAccounts(new ArrayList<>());
+
         return user;
     }
+
 
     @Override
     public int calculateCreditRating(double monthlyIncome) {
