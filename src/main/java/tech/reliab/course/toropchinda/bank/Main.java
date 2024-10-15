@@ -3,7 +3,7 @@ package main.java.tech.reliab.course.toropchinda.bank;
 import main.java.tech.reliab.course.toropchinda.bank.entity.*;
 import main.java.tech.reliab.course.toropchinda.bank.service.*;
 import main.java.tech.reliab.course.toropchinda.bank.service.impl.*;
-
+import main.java.tech.reliab.course.toropchinda.bank.Enum.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,34 +22,34 @@ public class Main {
         PaymentAccountService paymentAccountService = new PaymentAccountServiceImpl();
         CreditAccountService creditAccountService = new CreditAccountServiceImpl();
 
-        // Создание 5 банков
-        for (int i = 1; i <= 5; i++) {
-            Bank bank = bankService.createBank(i, "Bank " + i);
+        // Создание банков
+        for (BankEnum bankEnum : BankEnum.values()) {
+            Bank bank = bankService.createBank(bankEnum.ordinal() + 1, bankEnum.getBankName());
 
             List<Employee> employees = new ArrayList<>();  // Список для хранения сотрудников каждого банка
 
-            // Создание 3 офисов для каждого банка
-            for (int j = 1; j <= 3; j++) {
-                BankOffice office = bankOfficeService.createOffice(j, "Office " + j, "Address " + j, "Работает", true, 0, true, true, true, 50000, 2000);
+            // Создание офисов
+            for (OfficeEnum officeEnum : OfficeEnum.values()) {
+                BankOffice office = bankOfficeService.createOffice(officeEnum.ordinal() + 1, officeEnum.getOfficeName(), officeEnum.getOfficeAddress(), StatusEnum.ACTIVE.getStatus(), true, 0, true, true, true, 50000, 2000);
                 bankService.increaseOfficeCount(bank);
 
-                // Создание 5 сотрудников в каждом офисе
-                for (int k = 1; k <= 5; k++) {
-                    Employee employee = employeeService.createEmployee(k, "Employee " + k, new Date(), "Manager", bank, false, office, true, 50000);
+                // Создание сотрудников
+                for (EmployeeEnum employeeEnum : EmployeeEnum.values()) {
+                    Employee employee = employeeService.createEmployee(employeeEnum.ordinal() + 1, "Employee " + (employeeEnum.ordinal() + 1), new Date(), employeeEnum.getPosition(), bank, false, office, true, 50000);
                     employees.add(employee);  // Добавляем сотрудников в список
                     bankService.increaseEmployeeCount(bank);
                 }
 
-                // Создание 3 банкоматов для каждого банка
-                for (int m = 1; m <= 3; m++) {
-                    BankAtm atm = atmService.createAtm(m, "ATM " + m, office.getAddress_office(), "Работает", bank, office, null, true, true, 10000, 500);
+                // Создание банкоматов
+                for (AtmEnum atmEnum : AtmEnum.values()) {
+                    BankAtm atm = atmService.createAtm(atmEnum.ordinal() + 1, atmEnum.getAtmName(), office.getAddress_office(), StatusEnum.ACTIVE.getStatus(), bank, office, null, true, true, 10000, 500);
                     bankService.increaseAtmCount(bank);
                 }
             }
 
-            // Создание 5 клиентов для каждого банка
-            for (int c = 1; c <= 5; c++) {
-                User user = userService.createUser(c, "User " + c, "01.01.1980", "Company " + c);
+            // Создание клиентов
+            for (UserEnum userEnum : UserEnum.values()) {
+                User user = userService.createUser(userEnum.ordinal() + 1, userEnum.getFullName(), userEnum.getBirthDate(), userEnum.getPlaceOfWork());
                 bankService.increaseClientCount(bank);
 
                 // Создание 2 платежных счетов для каждого клиента
@@ -85,6 +85,11 @@ public class Main {
 
             // Вывод информации по банку
             System.out.println(bankService.readBank(bank));
+        }
+
+        // Вывод информации по всем клиентам
+        for (UserEnum userEnum : UserEnum.values()) {
+            System.out.println("Клиент: " + userEnum.getFullName());
         }
     }
 }
